@@ -8,7 +8,8 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="#" class="list-group-item clearfix" 
+        <cms-contact-item *ngFor="let contact of contacts"></cms-contact-item>
+        <!-- <a href="#" class="list-group-item clearfix" 
         *ngFor="let contact of contacts">
             <div class="pull-left">
                 <h4 class="list-group-item-heading">{{ contact.name }}</h4>
@@ -19,7 +20,7 @@
                 class="img-responsive" 
                 style="max-height: 50px;">           
             </span>
-        </a>
+        </a> -->
         <!-- <app-recipe-item></app-recipe-item> -->
     </div>
 </div>
