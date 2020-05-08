@@ -21,14 +21,15 @@ export class MessageEditComponent implements OnInit {
 
   onSendMessage() {
     const subjectValue = this.subject.nativeElement.value;
-    const msgTextValue = this.subject.nativeElement.value;
+    const msgTextValue = this.msgText.nativeElement.value;
 
     const message = new Message(
       1,
       subjectValue,
       msgTextValue,
-      this.currentSender)
-
+      this.currentSender);
+// console.log(message);
+// return;
       this.addMessageEvent.emit(message);
 
       this.onClear();
