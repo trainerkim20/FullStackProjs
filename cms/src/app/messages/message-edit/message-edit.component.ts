@@ -12,8 +12,6 @@ export class MessageEditComponent implements OnInit {
   @ViewChild('subject', {static: false}) subject: ElementRef;
   @ViewChild('msgText', {static: false}) msgText: ElementRef;
   
-
-
   constructor() { }
 
   ngOnInit(): void {
