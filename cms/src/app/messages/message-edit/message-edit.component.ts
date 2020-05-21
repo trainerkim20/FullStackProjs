@@ -22,7 +22,7 @@ export class MessageEditComponent implements OnInit {
     const msgTextValue = this.msgText.nativeElement.value;
 
     const message = new Message(
-      1,
+      '1',
       subjectValue,
       msgTextValue,
       this.currentSender);
