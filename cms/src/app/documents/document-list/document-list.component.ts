@@ -27,8 +27,8 @@ documents: Document[] = [];
     this.documents = this.docService.getDocuments();
   }
 
-  // onSelectedDocument(document: Document) {
-  //   this.selectedDocumentEvent.emit(document);
-  // }
+  onSelectedDocument(document: Document) {
+    this.docService.documentSelectedEvent.emit(document);
+  }
 
 }
