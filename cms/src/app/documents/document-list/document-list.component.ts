@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Document } from '../document.model';
 import { DocumentsService } from '../documents.service'
 
@@ -27,8 +27,8 @@ documents: Document[] = [];
     this.documents = this.docService.getDocuments();
   }
 
-  onSelectedDocument(document: Document) {
-    this.docService.documentSelectedEvent.emit(document);
-  }
+  // onSelectedDocument(document: Document) {
+  //   this.docService.documentSelectedEvent.emit(document);
+  // }
 
 }
