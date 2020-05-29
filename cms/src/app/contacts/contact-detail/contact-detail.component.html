@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <a [routerLink]="['edit']" class="btn btn-primary" type="submit">Edit</a>
-                <a class="btn btn-danger" type="submit">Delete</a>
+                <a (click)= onDelete() class="btn btn-danger" type="submit">Delete</a>
             </div>
         </div>
     </div>

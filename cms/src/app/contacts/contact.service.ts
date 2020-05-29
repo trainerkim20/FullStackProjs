@@ -7,11 +7,27 @@ export class ContactService {
 
   contactSelectedEvent = new EventEmitter<Contact>();
 
+  contactChangedEvent = new EventEmitter<Contact>();
+
   contacts: Contact[] = [];
 
   constructor() {
     this.contacts = MOCKCONTACTS;
    }
+
+    deleteContact(contact: Contact) {
+    if (document === null) {
+      return;
+    }
+
+    const pos = this.contacts.indexOf(contact);
+    if(pos < 0) {
+      return;
+    }
+
+    this.contacts.splice(pos, 1);
+    this.contactChangedEvent.emit(this.contacts.slice());
+  }
 
    getContacts() {
      return this.contacts.slice();
