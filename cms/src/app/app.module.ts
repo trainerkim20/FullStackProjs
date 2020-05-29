@@ -21,6 +21,7 @@ import { ContactService } from './contacts/contact.service';
 import { AppRoutingModule } from './app-routing';
 import { DocumentViewComponent } from './documents/document-view/document-view.component';
 import { DocumentsEditComponent } from './documents/documents-edit/documents-edit.component';
+import { WindRefService } from './wind-ref.service';
 
 @NgModule({
   declarations: [
@@ -44,12 +45,14 @@ import { DocumentsEditComponent } from './documents/documents-edit/documents-edi
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
 
   ],
   providers: [
     MessagesService,
-    ContactService
+    ContactService,
+    WindRefService
   ],
   bootstrap: [AppComponent]
 })
