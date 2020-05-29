@@ -23,7 +23,13 @@ documents: Document[] = [];
 
   constructor(private docService: DocumentsService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.docService.documentChangedEvent.subscribe(
+      (documents: Document[]) => {
+        this.documents = documents;
+      }
+    );
+
     this.documents = this.docService.getDocuments();
   }
 
