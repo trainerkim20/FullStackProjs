@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Document } from '../document.model';
+import { DocumentsService } from '../documents.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'cms-document-detail',
@@ -8,11 +10,20 @@ import { Document } from '../document.model';
 })
 export class DocumentDetailComponent implements OnInit {
 
-  @Input() document: Document;
+  document: Document;
+  id: string;
 
-  constructor() { }
+  constructor(private documentService: DocumentsService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.document = this.documentService.getDocument(this.id);
+    });
+  }
+
+  onEditDocument() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
 }

@@ -10,6 +10,7 @@ export class DocumentsService {
   documentSelectedEvent = new EventEmitter<Document>();
 
   documents: Document[] = [];
+  id: string;
 
   constructor() {
     this.documents = MOCKDOCUMENTS;
@@ -19,7 +20,7 @@ export class DocumentsService {
      return this.documents.slice();
    }
 
-   getContact(id: string): Document{
+   getDocument(id: string): Document{
      for(const document of this.documents) {
        if(document.id === id) {
          return document;
