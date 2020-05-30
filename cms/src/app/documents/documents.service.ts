@@ -18,19 +18,19 @@ export class DocumentsService {
     this.documents = MOCKDOCUMENTS;
    }
 
-   deleteDocument(document: Document) {
-    if (document === null) {
-      return;
-    }
+  //  deleteDocument(document: Document) {
+  //   if (document === null) {
+  //     return;
+  //   }
 
-    const pos = this.documents.indexOf(document);
-    if(pos < 0) {
-      return;
-    }
+  //   const pos = this.documents.indexOf(document);
+  //   if(pos < 0) {
+  //     return;
+  //   }
 
-    this.documents.splice(pos, 1);
-    this.documentChangedEvent.emit(this.documents.slice());
-  }
+  //   this.documents.splice(pos, 1);
+  //   this.documentChangedEvent.emit(this.documents.slice());
+  // }
 
    getDocuments() {
      return this.documents.slice();
