@@ -7,7 +7,7 @@ import { MOCKDOCUMENTS} from "./MOCKDOCUMENTS"
 })
 export class DocumentsService {
 
-  documentChangedEvent = new EventEmitter<Document>();
+  documentChangedEvent = new EventEmitter<Document[]>();
 
   documentSelectedEvent = new EventEmitter<Document>();
 
