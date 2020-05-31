@@ -27,10 +27,10 @@ export class ContactDetailComponent implements OnInit {
     });
   }
 
-  // onDelete() {
-  //   this.contactService.deleteContact(this.contact);
-  //   this.router.navigateByUrl('/contact');
-  // }
+  onDelete() {
+    this.contactService.deleteContact(this.contact);
+    this.router.navigateByUrl('/contact');
+  }
 
 }
 

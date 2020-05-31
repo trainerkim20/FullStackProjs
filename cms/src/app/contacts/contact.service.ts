@@ -15,19 +15,19 @@ export class ContactService {
     this.contacts = MOCKCONTACTS;
    }
 
-  //   deleteContact(contact: Contact) {
-  //   if (document === null) {
-  //     return;
-  //   }
+    deleteContact(contact: Contact) {
+    if (document === null) {
+      return;
+    }
 
-  //   const pos = this.contacts.indexOf(contact);
-  //   if(pos < 0) {
-  //     return;
-  //   }
+    const pos = this.contacts.indexOf(contact);
+    if(pos < 0) {
+      return;
+    }
 
-  //   this.contacts.splice(pos, 1);
-  //   this.contactChangedEvent.emit(this.contacts.slice());
-  // }
+    this.contacts.splice(pos, 1);
+    this.contactChangedEvent.emit(this.contacts.slice());
+  }
 
    getContacts() {
      return this.contacts.slice();
