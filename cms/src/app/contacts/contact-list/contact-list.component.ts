@@ -20,6 +20,11 @@ contacts: Contact[] = [];
 constructor(private clService: ContactService) { }
 
   ngOnInit() {
+    this.clService.contactChangedEvent.subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+      }
+    );
     this.contacts = this.clService.getContacts();
   }
 
