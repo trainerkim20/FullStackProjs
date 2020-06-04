@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Document } from '../document.model';
-import { DocumentsService } from '../documents.service'
+import { DocumentsService } from '../documents.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'cms-document-list',
   templateUrl: './document-list.component.html',
   styleUrls: ['./document-list.component.css']
 })
-export class DocumentListComponent implements OnInit {
+export class DocumentListComponent implements OnInit, OnDestroy {
 
 //  documents: Document[] = [
 //   new Document(1, 'Web Full Stack', 'Learn how to develop modern web applications using the MEAN stack.', 'https://byui.instructure.com/courses/92918', null),
@@ -18,13 +19,14 @@ export class DocumentListComponent implements OnInit {
 //     ];
 
 documents: Document[] = [];
+private subscription: Subscription;
 
     // @Output() selectedDocumentEvent = new EventEmitter<Document>();
 
   constructor(private docService: DocumentsService) { }
 
   ngOnInit() {
-    this.docService.documentChangedEvent.subscribe(
+    this.subscription = this.docService.documentChangedEvent.subscribe(
       (documents: Document[]) => {
         this.documents = documents;
       }
@@ -33,8 +35,13 @@ documents: Document[] = [];
     this.documents = this.docService.getDocuments();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   // onSelectedDocument(document: Document) {
   //   this.docService.documentSelectedEvent.emit(document);
   // }
+
 
 }
