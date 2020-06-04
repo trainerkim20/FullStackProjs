@@ -2,11 +2,12 @@ import { Recipe } from './recipe.mode';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredinet } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service'
+import { Subject } from 'rxjs';
 
 @Injectable()
 
 export class RecipeService {
-    recipeSelected = new EventEmitter<Recipe>();
+    recipeSelected = new Subject<Recipe>();
     private recipes: Recipe[] = [
         new Recipe('Schnitzel', 'Awesome', 'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg', 
         [
