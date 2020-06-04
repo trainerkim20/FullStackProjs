@@ -48,5 +48,28 @@ export class DocumentsService {
      return null;
    }
 
+
+getMaxId(): number {
+
+  let maxId = 0;
+
+  for(const document of this.documents) {
+    let currentId = parseInt(document.id)
+    if (currentId > maxId) {
+      maxId = currentId;
+    }
+  }
+  return maxId;
+}
+
+  // for each document in the documents list
+  //     currentId = convert document.id into a number
+  //     if currentId > maxId then
+  //         maxId = currentId
+  //     endIf
+  // endFor
+
+  
+
    
 }
