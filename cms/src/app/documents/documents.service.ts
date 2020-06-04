@@ -19,6 +19,7 @@ export class DocumentsService {
 
   constructor() {
     this.documents = MOCKDOCUMENTS;
+    this.maxDocumentId = this.getMaxId();
    }
 
    deleteDocument(document: Document) {
@@ -60,16 +61,23 @@ getMaxId(): number {
     }
   }
   return maxId;
+  }  
 }
 
-  // for each document in the documents list
-  //     currentId = convert document.id into a number
-  //     if currentId > maxId then
-  //         maxId = currentId
-  //     endIf
-  // endFor
-
+// addDocument(newDocument: Document) {
   
+//   if (!newDocument) {
 
-   
+//   }
+  
+  
+  // if newDocument is undefined or null then
+  //     return
+  // endIf
+
+  // this.maxDocumentId++
+  // newDocument.id = this.maxDocumentId
+  // push newDocument onto the documents list
+  // documentsListClone = documents.slice()
+  // documentListChangedEvent.next(documentsListClone)
 }
