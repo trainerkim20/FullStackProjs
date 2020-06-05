@@ -22,6 +22,24 @@ export class DocumentsService {
     this.maxDocumentId = this.getMaxId();
    }
 
+   maxDocumentId: number;
+
+   addDocument(newDocument: Document) {
+    if (!newDocument) {
+      return;
+    }
+
+    this.maxDocumentId++;
+
+    newDocument.id = this.maxDocumentId.toString();
+
+    this.documents.push(newDocument);
+
+    const documentListClone = this.documents.slice();
+
+    this.documentListChangedEvent.next(documentListClone);
+  }
+
    deleteDocument(document: Document) {
     if (document === null) {
       return;
@@ -33,7 +51,10 @@ export class DocumentsService {
     }
 
     this.documents.splice(pos, 1);
-    this.documentChangedEvent.emit(this.documents.slice());
+    const documentListClone = this.documents.slice();
+
+    this.documentListChangedEvent.next(documentListClone);
+    // this.documentChangedEvent.emit(this.documents.slice());
   }
 
    getDocuments() {
@@ -61,23 +82,34 @@ getMaxId(): number {
     }
   }
   return maxId;
-  }  
+  } 
+  
+  updateDocument(originalDocument: Document, newDocument: Document) {
+    if (!originalDocument || !newDocument) {
+      return;
+    }
+
+    const pos = this.documents.indexOf(originalDocument);
+
+    if(pos < 0) {
+      return;
+    }
+
+    newDocument.id = originalDocument.id;
+
+    this.documents[pos] = newDocument;
+
+    const documentListClone = this.documents.slice();
+
+    this.documentListChangedEvent.next(documentListClone);
+
+  }
+
+
+
 }
 
-// addDocument(newDocument: Document) {
-  
-//   if (!newDocument) {
 
-//   }
   
-  
-  // if newDocument is undefined or null then
-  //     return
-  // endIf
 
-  // this.maxDocumentId++
-  // newDocument.id = this.maxDocumentId
-  // push newDocument onto the documents list
-  // documentsListClone = documents.slice()
-  // documentListChangedEvent.next(documentsListClone)
-}
+
