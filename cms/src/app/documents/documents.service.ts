@@ -10,7 +10,7 @@ export class DocumentsService {
 
   documentListChangedEvent = new Subject<Document[]>();
 
-  documentChangedEvent = new EventEmitter<Document[]>();
+  // documentChangedEvent = new EventEmitter<Document[]>();
 
   documentSelectedEvent = new EventEmitter<Document>();
 

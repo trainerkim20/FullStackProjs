@@ -10,7 +10,7 @@ export class ContactService {
 
   contactSelectedEvent = new EventEmitter<Contact>();
 
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  // contactChangedEvent = new EventEmitter<Contact[]>();
 
   contacts: Contact[] = [];
 
