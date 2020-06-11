@@ -42,8 +42,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     // const ingName = this.nameInputRef.nativeElement.value;
     // const ingAmount = this.amountInputRef.nativeElement.value;
     const newIngrediant = new Ingredinet(value.name, value.amount);
+    if (this.editMode) {
+      this.slService.updateIngredient(this.editedItemIndex, newIngrediant);
+    } else {
+      this.slService.addIngredient(newIngrediant);
+    }
     // this.ingrediantAdded.emit(newIngrediant);
-    this.slService.addIngredient(newIngrediant);
   }
 
   ngOnDestroy() {
