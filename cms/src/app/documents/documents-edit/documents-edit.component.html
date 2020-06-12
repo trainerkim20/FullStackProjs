@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
   
-      <form id="document-edit">
+      <form id="document-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="row">
   
           <div class="col-sm-12 form-group">
@@ -9,6 +9,10 @@
             <input
               type="text"
               id="name"
+              name="name"
+              required
+              #name = "ngForm"
+              [ngModel]=document?.name
               class="form-control"
               size="120"
               max="120">
@@ -19,6 +23,8 @@
             <input
               type="text"
               id="description"
+              name="description"
+              [ngModel]=document?.description
               class="form-control"
               size="120"
               max="255">
@@ -29,16 +35,21 @@
             <input
               type="text"
               id="documentUrl"
+              name="documentUrl"
+              #documentUrl = "ngForm" 
+            [ngModel]=document?.url
+              required
               class="form-control"
               size="150"
               max="255">
           </div>
         </div>
   
-  
+        <div class="alert alert-danger" ngIf="!name.valid, !documentUrl.valid">The Document title and URL are required fields</div>
+
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" >Save</button>
+            <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
             <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
           </div>
         </div>
