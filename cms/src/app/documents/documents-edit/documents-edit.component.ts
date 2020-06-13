@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { DocumentsService } from '../documents.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Document } from '../document.model'
@@ -12,7 +12,7 @@ import { Document } from '../document.model'
 export class DocumentsEditComponent implements OnInit {
 
   // @ViewChild('f', {static: false}) ngForm: NgForm;
-
+  ngForm: FormGroup;
   originalDocument: Document;
   document: Document;
   editMode: boolean = false;
@@ -43,9 +43,9 @@ export class DocumentsEditComponent implements OnInit {
     )
   }
 
-  onSubmit(ngform: NgForm) {
-    console.log(ngform);
-    const value = ngform.value;
+  onSubmit(form: NgForm) {
+    console.log(form);
+    const value = form.value;
     const newDocument = new Document(this.id, value.name, value.documentUrl, value.description, null);
 
     if(this.editMode = true) {
