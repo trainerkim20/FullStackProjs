@@ -9,12 +9,13 @@
               id="name"
               name="name"
               #name = "ngModel"
+              required
               [ngModel]=contact?.name
               class="form-control required"
               size="120"
               max="120">
           </div>
-  
+          <!-- pattern=“[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$” -->
           <div class="col-sm-12 form-group">
             <label for="email">Email</label>
             <input
@@ -22,14 +23,14 @@
               id="email"
               name="email"
               required
-              pattern=“[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$”
+              
               #email = "ngModel"
               [ngModel]=contact?.email
               class="form-control required"
               size="120"
               max="255">
           </div>
-          <div class="alert alert-danger">Enter a valid Email address.</div>
+          <div class="alert alert-danger" *ngIf="!email.valid">Enter a valid Email address.</div>
   
           <div class="col-sm-12 form-group">
             <label for="phone">Phone</label>
@@ -45,7 +46,7 @@
               max="255">
   
           </div>
-          <div class="alert alert-danger">Enter a valid phone number.</div>
+          <div class="alert alert-danger" *ngIf="!phone.valid">Enter a valid phone number.</div>
   
           <div class="col-sm-12 form-group">
             <label for="imageUrl">Image URL</label>
@@ -61,7 +62,7 @@
           </div>
         </div>
 
-        <div class="alert alert-danger">The Name and Email are required.</div>
+        <div class="alert alert-danger" *ngIf="!name.valid || !email.valid">The Name and Email are required.</div>
   
         <div class="form-group">
           <label for="groupList">Group contacts</label>

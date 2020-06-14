@@ -12,7 +12,6 @@ import { DndModule } from 'ng2-dnd';
 })
 export class ContactEditComponent implements OnInit {
 
-  ngForm = FormGroup;
   contact: Contact = null;
   originalContact: Contact;
   groupContacts: Contact[] = [];
@@ -20,6 +19,7 @@ export class ContactEditComponent implements OnInit {
   hasGroup: boolean = false;
   id: string;
   invalidGroupContact: boolean;
+  ngForm: FormGroup;
 
   constructor(private contactService: ContactService, 
     private router: Router, 
@@ -64,12 +64,12 @@ export class ContactEditComponent implements OnInit {
     } else {
       this.contactService.addContact(newContact);
     }
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/contact']);
   }
 
 
   onCancel() {
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/contact']);
   }
 
   isInvalidContact(newContact: Contact) {
