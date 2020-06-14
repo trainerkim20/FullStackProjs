@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 import { DocumentsService } from '../documents.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Document } from '../document.model'
+import { Document } from '../document.model';
+
 
 @Component({
   selector: 'cms-documents-edit',

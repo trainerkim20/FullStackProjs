@@ -25,6 +25,7 @@ import { DocumentsEditComponent } from './documents/documents-edit/documents-edi
 import { WindRefService } from './wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule } from 'ng2-dnd';
+import { DocumentsService } from './documents/documents.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { DndModule } from 'ng2-dnd';
     DropdownDirective,
     DocumentViewComponent,
     DocumentsEditComponent,
-    ContactEditComponent
+    ContactEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +59,7 @@ import { DndModule } from 'ng2-dnd';
   ],
   providers: [
     MessagesService,
+    DocumentsService,
     ContactService,
     WindRefService
   ],

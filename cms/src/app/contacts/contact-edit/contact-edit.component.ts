@@ -3,6 +3,7 @@ import { Contact } from '../contacts.model';
 import { ContactService } from '../contact.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, NgForm } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 @Component({
   selector: 'cms-contact-edit',
