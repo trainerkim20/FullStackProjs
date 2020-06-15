@@ -3,7 +3,9 @@ import {Message} from './message.model'
 import {MOCKMESSAGES} from "./MOCKMESSAGES"
 import { Contact } from '../contacts/contacts.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class MessagesService {
 

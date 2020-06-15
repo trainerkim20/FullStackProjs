@@ -3,7 +3,7 @@ import { Contact } from '../contacts.model';
 import { ContactService } from '../contact.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, NgForm } from '@angular/forms';
-import { DndModule } from 'ng2-dnd';
+
 
 @Component({
   selector: 'cms-contact-edit',
@@ -32,22 +32,22 @@ export class ContactEditComponent implements OnInit {
       (params: Params) => {
         this.id = params['id'];
 
-        if (this.id = null) {
+        if (!this.id) {
           this.editMode = false;
           return;
         }
 
         this.originalContact = this.contactService.getContact(this.id);
 
-        if (this.originalContact = null) {
+        if (!this.originalContact) {
           return;
         }
 
         this.editMode=true;
         this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
-        if (this.hasGroup = true) {
-          let contactGroup = JSON.parse(JSON.stringify(this.groupContacts));
+        if (this.originalContact.group && this.originalContact.group.length > 0) {
+          this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
         }
 
       }
@@ -57,9 +57,9 @@ export class ContactEditComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log(form);
     const value = form.value;
-    const newContact = new Contact(this.id, value.name, value.email, value.phone, value.imageUrl, null);
+    const newContact = new Contact(this.id, value.name, value.email, value.phone, value.imageUrl, this.groupContacts);
 
-    if(this.editMode = true) {
+    if(this.editMode == true) {
       this.contactService.updateContact(this.originalContact, newContact)
     } else {
       this.contactService.addContact(newContact);
@@ -76,7 +76,7 @@ export class ContactEditComponent implements OnInit {
     if(!newContact) {
       return true;
     }
-    if (newContact.id === this.contact.id) {
+    if (this.contact && newContact.id === this.contact.id) {
       return true;
     }
     for (let i = 0; i < this.groupContacts.length; i++) {

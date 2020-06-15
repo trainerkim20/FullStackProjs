@@ -26,14 +26,14 @@ export class DocumentsEditComponent implements OnInit {
      (params: Params) => {
       this.id = params['id'];
 
-       if (this.id = null) {
+       if (this.id == null) {
          this.editMode = false;
          return;
        }
 
        this.originalDocument = this.documentService.getDocument(this.id);
 
-       if (this.originalDocument = null) {
+       if (this.originalDocument == null) {
           return;
        }
 
@@ -49,7 +49,7 @@ export class DocumentsEditComponent implements OnInit {
     const value = form.value;
     const newDocument = new Document(this.id, value.name, value.documentUrl, value.description, null);
 
-    if(this.editMode = true) {
+    if(this.editMode == true) {
       this.documentService.updateDocument(this.originalDocument, newDocument)
     } else {
       this.documentService.addDocument(newDocument);

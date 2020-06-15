@@ -26,7 +26,7 @@ import { WindRefService } from './wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { DndModule } from 'ng2-dnd';
 import { DocumentsService } from './documents/documents.service';
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+// import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 @NgModule({
   declarations: [
@@ -59,14 +59,14 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 
   ],
   providers: [
-    MessagesService,
-    DocumentsService,
-    ContactService,
-    WindRefService
+    // MessagesService,
+    // DocumentsService,
+    // ContactService,
+    // WindRefService
   ],
-  bootstrap: [AppComponent],
-  schemas: [
-    NO_ERRORS_SCHEMA
-  ]
+  bootstrap: [AppComponent]
+  // schemas: [
+  //   NO_ERRORS_SCHEMA
+  // ]
 })
 export class AppModule { }

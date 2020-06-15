@@ -3,7 +3,11 @@ import { Contact } from "./contacts.model";
 import { MOCKCONTACTS } from "./MOCKCONTACTS";
 import { Subject } from "rxjs";
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export class ContactService {
 
   contactListChangedEvent = new Subject<Contact[]>();
