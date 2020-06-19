@@ -32,7 +32,7 @@ private subscription: Subscription
       }
     );
 
-    this.documents = this.docService.getDocuments();
+    this.docService.getDocuments();
   }
 
   ngOnDestroy() {
