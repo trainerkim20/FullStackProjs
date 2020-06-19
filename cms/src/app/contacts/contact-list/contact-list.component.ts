@@ -19,7 +19,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
 // ];
 
 contacts: Contact[] = [];
-private subscription: Subscription
+private subscription: Subscription;
+term: string;
 
 // @Output() selectedContactEvent = new EventEmitter<Contact>();
   
@@ -40,6 +41,10 @@ constructor(private clService: ContactService) { }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onKeyPress(value: string) {
+    this.term = value;
   }
 
   // onSelected(contact: Contact) {

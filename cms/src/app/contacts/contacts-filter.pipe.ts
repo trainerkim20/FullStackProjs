@@ -8,6 +8,15 @@ export class ContactsFilterPipe implements PipeTransform {
 
   transform(contacts: Contact[],term: string): any {
     
-    //Look at this class videos (Thursday) to complete this correctly
+    let filteredContacts: Contact[] = [];
+
+    if (term && term.length) {
+      filteredContacts = contacts.filter(
+        (contact: Contact) =>
+        contact.name.toLowerCase().includes(term.toLowerCase())
+      );
+    }
+    return filteredContacts.length > 0 ? filteredContacts : contacts;
   }
+  
 }
