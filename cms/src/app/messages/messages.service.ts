@@ -3,6 +3,7 @@ import {Message} from './message.model';
 import {MOCKMESSAGES} from "./MOCKMESSAGES";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http"
 import { Contact } from '../contacts/contacts.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,15 @@ import { Contact } from '../contacts/contacts.model';
 
 export class MessagesService {
 
-  messageChangeEvent = new EventEmitter<Message[]>();
+  maxMessageId: number;
+
+  messageChangeEvent = new Subject<Message[]>();
 
   messages: Message[] = [];
 
   constructor(private http: HttpClient) {
-    this.messages = MOCKMESSAGES;
-    this.maxMessageId = this.getMaxId;
+    // this.messages = MOCKMESSAGES;
+    
    }
 
    getMaxId(): number {
@@ -41,6 +44,7 @@ export class MessagesService {
         this.messages = messages;
 
         this.maxMessageId = this.getMaxId();
+        this.messageChangeEvent.next(this.messages.slice());
       }
     )
    }
@@ -56,19 +60,20 @@ export class MessagesService {
 
    addMessage (message: Message) {
      this.messages.push(message);
-     this.messageChangeEvent.emit(this.messages.slice());
+    //  this.messageChangeEvent.emit(this.messages.slice());
+    this.storeMessages();
    }
 
-//    storeMessages() {
-//      let messages = JSON.stringify(this.messages);
+   storeMessages() {
+     let messages = JSON.stringify(this.messages);
 
-//      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-//      this.http.put('https://rkjcms-54e6b.firebaseio.com/', messages, {header:headers})
-//      .subscribe(
-//        () => {
-//          this.messageListChangeEvent.next(this.messages.slice());
-//        }
-//      )
-//    }
+     this.http.put('https://rkjcms-54e6b.firebaseio.com/messages.json', messages, {headers:headers})
+     .subscribe(
+       () => {
+         this.messageChangeEvent.next(this.messages.slice());
+       }
+     )
+   }
 }

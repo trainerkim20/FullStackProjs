@@ -32,7 +32,7 @@ constructor(private clService: ContactService) { }
         this.contacts = contacts;
       }
     );
-    this.contacts = this.clService.getContacts();
+   this.clService.getContacts();
   }
 
   onSelected(contact: Contact) {

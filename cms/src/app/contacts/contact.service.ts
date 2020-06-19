@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from "./contacts.model";
 import { MOCKCONTACTS } from "./MOCKCONTACTS";
 import { Subject } from "rxjs";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 
 @Injectable({
@@ -20,8 +21,8 @@ export class ContactService {
 
   maxContactId: number;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http: HttpClient) {
+    // this.contacts = MOCKCONTACTS;
     this.maxContactId = this.getMaxId();
    }
 
@@ -35,9 +36,10 @@ export class ContactService {
 
      this.contacts.push(newContact);
 
-     const contactListClone = this.contacts.slice();
+    //  const contactListClone = this.contacts.slice();
 
-     this.contactListChangedEvent.next(contactListClone);
+    //  this.contactListChangedEvent.next(contactListClone);
+    this.storeContacts();
    }
 
     deleteContact(contact: Contact) {
@@ -51,14 +53,29 @@ export class ContactService {
     }
 
     this.contacts.splice(pos, 1);
-    const contactListClone = this.contacts.slice();
+    // const contactListClone = this.contacts.slice();
 
-     this.contactListChangedEvent.next(contactListClone);
+    //  this.contactListChangedEvent.next(contactListClone);
     // this.contactChangedEvent.emit(this.contacts.slice());
+    this. storeContacts();
   }
 
    getContacts() {
-     return this.contacts.slice();
+    //  return this.contacts.slice();
+    this.http.get('https://rkjcms-54e6b.firebaseio.com/contacts.json')
+    .subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+
+        this.maxContactId = this.getMaxId();
+
+        this.contacts.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+        this.contactListChangedEvent.next(this.contacts.slice());
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
    }
 
    getContact(id: string): Contact{
@@ -98,9 +115,23 @@ export class ContactService {
 
      this.contacts[pos] = newContact;
 
-     const contactListClone = this.contacts.slice();
+    //  const contactListClone = this.contacts.slice();
 
-     this.contactListChangedEvent.next(contactListClone);
+    //  this.contactListChangedEvent.next(contactListClone);
+    this.storeContacts();
 
    }
+
+   storeContacts() {
+    let contacts = JSON.stringify(this.contacts);
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    this.http.put('https://rkjcms-54e6b.firebaseio.com/contacts.json', this.contacts, {headers: headers})
+    .subscribe(
+      () => {
+        this.contactListChangedEvent.next(this.contacts.slice());
+      }
+    );
+  }
 }
