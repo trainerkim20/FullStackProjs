@@ -1,11 +1,14 @@
 const http = require('http');
-const { server } = require('karma');
+const app = require('./backend/app');
 
-http.createServer((req, res) => {
-    res.end('This is my first response');
-});
+const port = process.env.PORT || 3000;
 
-server.listen(process.env.PORT || 3000);
+// const { server } = require('karma');
+
+app.set('port', port);
+const server = http.createServer(app);
+
+server.listen(port);
 
 
 
