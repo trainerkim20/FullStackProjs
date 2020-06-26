@@ -14,11 +14,21 @@ var mongoose = require('mongoose');
 var index = require('./server/routes/app');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
+const messageRoutes = require('./server/routes/messages');
+const documentRoutes = require('./server/routes/contacts');
+const contactRoutes = require('./server/routes/documents');
 
 // establish a connection to the mongo database
 // *** Important *** change yourPort and yourDatabase
 //     to those used by your database
-mongoose.connect('localhost:yourPort/yourDatabaseName');
+mongoose.connect('localhost:yourPort/yourDatabaseName', 
+{ useNewUrlParser: true }, (err, res) => {
+  if(err) {
+    console.log('Connection failed' + err);
+  } else {
+    console.log('Connected to database');
+  }
+});
 
 var app = express(); // create an instance of express
 
@@ -31,12 +41,15 @@ app.use(logger('dev')); // Tell express to use the Morgan logger
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist/cms')));
 
 // Tell express to map the default route ("/") to the index route
 app.use('/', index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
+app.use('/messages', messageRoutes);
+app.use('/contacts', contactRoutes);
+app.use('/documents', documentRoutes);
 
 app.use(function(req, res, next) {
     res.render("index");
@@ -44,7 +57,7 @@ app.use(function(req, res, next) {
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/cms/index.html'));
 });
 
 // Define the port address and tell express to use this port
