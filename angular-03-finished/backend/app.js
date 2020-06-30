@@ -30,6 +30,7 @@ app.post("/api/posts", (req, res, next) => {
 // next();
 // });
 
+
 app.get('/api/posts', (req, res, next) => {
     const posts = [
         { id: 'fondjdnkdk', 
