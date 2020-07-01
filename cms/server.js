@@ -21,7 +21,7 @@ const contactRoutes = require('./server/routes/documents');
 // establish a connection to the mongo database
 // *** Important *** change yourPort and yourDatabase
 //     to those used by your database
-mongoose.connect('localhost:yourPort/yourDatabaseName', 
+mongoose.connect('localhost:27017/cms', 
 { useNewUrlParser: true }, (err, res) => {
   if(err) {
     console.log('Connection failed' + err);

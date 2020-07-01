@@ -9,3 +9,4 @@ var schema = new Schema({
 });
 
 module.exports = monogoose.model('Message', schema);
+
