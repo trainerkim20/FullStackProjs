@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
-const Document = require('../models/documents');
+const Document = require('../models/document');
 const { response } = require('express');
 // const documents = require('../models/documents');
 
@@ -57,7 +57,6 @@ function returnError(res, error) {
 
 router.get('/', (req, res, next) => {
     Document.find()
-    .population('group')
     .then(documents => {
         res.status(200).json({
             message: 'Documents fetched successfully!',

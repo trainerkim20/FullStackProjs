@@ -8,5 +8,5 @@ var schema = new Schema({
     sender: {type: Schema.Types.ObjectId, ref: 'Contact'}
 });
 
-module.exports = monogoose.model('Message', schema);
+module.exports = mongoose.model('Message', schema);
 

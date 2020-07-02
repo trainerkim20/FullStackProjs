@@ -1,5 +1,6 @@
-var Schema = mongoose.Schema;
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
 
 var documentSchema = new Schema({
     id: {type: String, required: true},
@@ -9,4 +10,4 @@ var documentSchema = new Schema({
     
 });
 
-module.exports = monogoose.model('Document', documentSchema);
+module.exports = mongoose.model('Document', documentSchema);

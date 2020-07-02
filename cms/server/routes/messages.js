@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
-const Message = require('../models/messages');
+const Message = require('../models/message');
 const { response } = require('express');
 // const documents = require('../models/documents');
 
@@ -57,7 +57,6 @@ function returnError(res, error) {
 
 router.get('/', (req, res, next) => {
     Message.find()
-    .population('group')
     .then(messages => {
         res.status(200).json({
             message: 'Messages fetched successfully!',

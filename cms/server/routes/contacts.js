@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
-const Contact = require('../models/contacts');
+const Contact = require('../models/contact');
 const { response } = require('express');
 
 var getContacts = function(res) {
@@ -49,7 +49,6 @@ function returnError(res, error) {
 
 router.get('/', (req, res, next) => {
     Contact.find()
-    .population('group')
     .then(contacts => {
         res.status(200).json({
             message: 'Contacts fetched successfully!',
