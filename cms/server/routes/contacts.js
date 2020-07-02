@@ -3,6 +3,42 @@ var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
 const Contact = require('../models/contacts');
+const { response } = require('express');
+
+var getContacts = function(res) {
+    Contact.find()
+    .populate('group')
+    .exec(function (err, contacts) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(200).json({
+            contact: 'Success',
+            obj: contacts
+        });
+    })
+}
+
+var saveContact = function (response, contact) {
+    if(contact.group && contact.group.length > 0) {
+        for (let groupContact of contact.group) {
+            groupContact = groupContact._id;
+        }
+    }
+    contact.save(function (err, responseult) {
+        response.setHeader('Content-Type', 'application/json');
+        if (err) {
+            return response.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        getContacts(response);
+    })
+}
 
 function returnError(res, error) {
     res.status(500).json({
