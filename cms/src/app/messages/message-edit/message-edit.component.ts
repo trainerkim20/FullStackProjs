@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Message } from '../message.model';
 import { MessagesService} from '../messages.service'
+import { ContactService } from 'src/app/contacts/contact.service';
+import {Contact} from '../../contacts/contacts.model';
 
 @Component({
   selector: 'cms-message-edit',
@@ -8,14 +10,17 @@ import { MessagesService} from '../messages.service'
   styleUrls: ['./message-edit.component.css']
 })
 export class MessageEditComponent implements OnInit {
-  currentSender = '1';
+  currentSender: Contact;
   // @Output() addMessageEvent = new EventEmitter<Message>();
   @ViewChild('subject', {static: false}) subject: ElementRef;
   @ViewChild('msgText', {static: false}) msgText: ElementRef;
   
-  constructor(private messService: MessagesService) { }
+  constructor(private messService: MessagesService, private contactService: ContactService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.contactService.getContact('101').subscribe((response) => {
+      this.currentSender = response.contact;
+    });
   }
 
   onSendMessage() {

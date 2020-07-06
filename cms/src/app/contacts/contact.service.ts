@@ -103,7 +103,7 @@ export class ContactService {
    }
 
    getContact(id: string) {
-    return this.http.get<{message: string, contact: Contact[]}>('http://localhost:3000/contacts/' + id);
+    return this.http.get<{message: string, contact: Contact}>('http://localhost:3000/contacts/' + id);
     //  .subscribe(
     //    (responseData) => {
     //      this.contacts = responseData.contacts;
