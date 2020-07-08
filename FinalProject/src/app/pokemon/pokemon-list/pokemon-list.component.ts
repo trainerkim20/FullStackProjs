@@ -24,7 +24,7 @@ constructor(private pkService: PokemonService) { }
         this.pokemons = pokemons;
       }
     );
-   this.pkService.getPokemons();
+  //  this.pkService.getPokemons();
   }
 
   onSelected(pokemon: Pokemon) {
