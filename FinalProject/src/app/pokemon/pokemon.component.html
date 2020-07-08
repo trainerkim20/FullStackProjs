@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-5">
+<app-pokemon-list></app-pokemon-list>
+    </div>
+      <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+              <router-outlet></router-outlet>
+                <!-- <cms-contact-detail *ngIf="selectedContact; else infoText" 
+                [contact]="selectedContact"></cms-contact-detail> -->
+                <ng-template #infoText>
+                  <p>Please select a Pokemon</p>
+                </ng-template>
+            </div>
+          </div>
+      </div>
+    </div>

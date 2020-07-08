@@ -1,0 +1,54 @@
+<div class="list-group-item clearfix">
+    <!-- <div class="row">
+        <div class="align-middle col-xs-12">
+            <h2 class="list-group-item-heading pull-left">Contacts</h2>
+                <button routerLink="new" class="btn btn-success pull-right">New Contact</button>
+        </div>
+    </div> -->
+    
+    <div class="panel-heading">
+        <div class="row">
+          <span class="title pad-left-right">Pokemon I've Used</span>
+        </div>
+        <div class="row">
+          <div class="input-group pull-left pad-left-right col-xs-7">
+            
+           <input 
+           type="text"
+           #searchBox
+           (keyup)="onKeyPress(searchBox.value)"
+           class="form-control"
+           placeholder="Enter a search value"
+           >
+    
+            <div class="glyphicon glyphicon glyphicon-search input-group-addon" 
+            (click)="onKeyPress(searchBox.value)"></div>
+          </div>
+          <div class="pull-right pad-left-right">
+            <a class="btn btn-success" [routerLink]="['new']">Add Pokemon</a>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <app-pokemon-item 
+            *ngFor="let pokemon of pokemons"
+            ></app-pokemon-item>
+            <!-- <a href="#" class="list-group-item clearfix" 
+            *ngFor="let contact of contacts">
+                <div class="pull-left">
+                    <h4 class="list-group-item-heading">{{ contact.name }}</h4>
+                </div>
+                <span class="pull-right">
+                    <img src="{{ contact.imageUrl }}" 
+                    alt="{{ contact.name }}" 
+                    class="img-responsive" 
+                    style="max-height: 50px;">           
+                </span>
+            </a> -->
+            <!-- <app-recipe-item></app-recipe-item> -->
+        </div>
+    </div>
+    
