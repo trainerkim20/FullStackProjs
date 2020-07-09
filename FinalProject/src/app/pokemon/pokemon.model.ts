@@ -9,7 +9,7 @@ export class Pokemon {
     // public imageUrl: string;
     // public group: Contact[];
 
-    constructor(public id: string, public name: string, public type: string, public game: string, public region: string, public imageUrl: string) {
+    constructor(public id: string, public name: string, public nickname: string, public type: string, public game: string, public imageUrl: string) {
         
         // this.id = id;
         // this.name = name;
