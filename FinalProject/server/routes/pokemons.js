@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
-const Contact = require('../models/contact');
+const Pokemon = require('../models/pokemon');
 const { response } = require('express');
 
-var getContacts = function(res) {
-    Contact.find()
+var getPokemons = function(res) {
+    Pokemon.find()
     .populate('group')
-    .exec(function (err, contacts) {
+    .exec(function (err, pokemons) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -16,19 +16,19 @@ var getContacts = function(res) {
             });
         }
         res.status(200).json({
-            contact: 'Success',
-            obj: contacts
+            pokemon: 'Success',
+            obj: pokemons
         });
     })
 }
 
-var saveContact = function (response, contact) {
-    if(contact.group && contact.group.length > 0) {
-        for (let groupContact of contact.group) {
-            groupContact = groupContact._id;
+var savePokemon = function (response, contact) {
+    if(pokemon.group && pokemon.group.length > 0) {
+        for (let groupPokemon of pokemon.group) {
+            groupPokemon = groupPokemon._id;
         }
     }
-    contact.save(function (err, responseult) {
+    pokemon.save(function (err, responseult) {
         response.setHeader('Content-Type', 'application/json');
         if (err) {
             return response.status(500).json({
@@ -36,7 +36,7 @@ var saveContact = function (response, contact) {
                 error: err
             });
         }
-        getContacts(response);
+        getPokemons(response);
     })
 }
 
@@ -48,12 +48,12 @@ function returnError(res, error) {
 }
 
 router.get('/', (req, res, next) => {
-    Contact.find()
+    Pokemon.find()
     .populate('group')
-    .then(contacts => {
+    .then(pokemons => {
         res.status(200).json({
-            message: 'Contacts fetched successfully!',
-            contacts: contacts
+            message: 'Pokemons fetched successfully!',
+            pokemons: pokemons
         });
     })
     .catch(error => {
@@ -62,14 +62,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-    Contact.findOne({
+    Pokemon.findOne({
         "id": req.params.id
     })
     .populate('group')
-    .then(contact => {
+    .then(pokemon => {
         res.status(200).json({
-            message: 'Contact fetched successfully!',
-            contact: contact
+            message: 'Pokemon fetched successfully!',
+            pokemon: pokemon
         });
     })
     .catch(error => {
@@ -78,21 +78,23 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const maxContactId = sequenceGenerator.nextId("contacts");
+    const maxPokemonId = sequenceGenerator.nextId("pokemons");
 
-    const contact = new Contact({
-        id: maxContactId,
+    const pokemon = new Pokemon({
+        id: maxPokemonId,
         name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
+        nickname: req.body.nickname,
+        gender: req.body.gender,
+        type: req.body.type,
+        game: req.body.game,
         imageUrl: req.body.imageUrl
     });
 
-    contact.save()
-    .then(createdContact => {
+    pokemon.save()
+    .then(createdPokemon => {
         res.status(201).json({
-            message: "Contact added successfully!",
-            contact: createdContact
+            message: "Pokemon added successfully!",
+            pokemon: createdPokemon
         });
     })
     .catch(error => {
@@ -101,22 +103,23 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-    Contact.findOne({
+    Pokemon.findOne({
         id: req.params.id
     })
-    .then(contact => {
-        contact.name = req.body.name;
-        contact.email = req.body.email;
-        contact.phone = req.body.phone;
-        contact.imageUrl = req.body.imageUrl;
-        contact.group = req.body.group;
+    .then(pokemon => {
+        pokemon.name = req.body.name;
+        pokemon.nickname = req.body.nickname;
+        pokemon.gender = req.body.gender;
+        pokemon.type = req.body.type;
+        pokemon.game = req.body.game;
+        pokemon.imageUrl = req.body.imageUrl;
 
-        Contact.updateOne({
+        Pokemon.updateOne({
             id: req.params.id
-        }, contact)
+        }, pokemon)
         .then(result => {
             res.status(204).json({
-                message: 'Contact updated successfully!'
+                message: 'Pokemon updated successfully!'
             })
         })
         .catch(error => {
@@ -126,16 +129,16 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete("/:id", (req, res, next) => {
-    Contact.findOne({
+    Pokemon.findOne({
         id: req.params.id
     })
-    .then(contact => {
-        Contact.deleteOne({
+    .then(pokemon => {
+        Pokemon.deleteOne({
             id: req.params.id
         })
         .then(result => {
             res.status(204).json({
-                message: "Contact deleted successfully!"
+                message: "Pokemon deleted successfully!"
             });
         })
         .catch(error => {
