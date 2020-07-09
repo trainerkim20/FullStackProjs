@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Pokemon } from "./pokemon.model";
 import { Subject } from "rxjs";
-// import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 
 @Injectable({
@@ -19,162 +19,162 @@ export class PokemonService {
   pokemons: Pokemon[] = [];
 
   // maxContactId: number;
-//   private http: HttpClient
-  constructor() {
+//   
+  constructor(private http: HttpClient) {
     // this.contacts = MOCKCONTACTS;
     // this.maxContactId = this.getMaxId();
    }
 
-//    sortAndSend() {
-//     this.pokemons.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-//     this.pokemonListChangedEvent.next(this.pokemons.slice());
-//    }
+   sortAndSend() {
+    this.pokemons.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+    this.pokemonListChangedEvent.next(this.pokemons.slice());
+   }
 
-//    addPokemon(newPokemon: Pokemon) {
-//      if (!newPokemon) {
-//        return;
-//      }
-//     //  this.maxContactId++;
-//     newPokemon.id = '';
+   addPokemon(newPokemon: Pokemon) {
+     if (!newPokemon) {
+       return;
+     }
+    //  this.maxContactId++;
+    newPokemon.id = '';
 
-//     const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-//     this.http.post<{message: string, pokemon: Pokemon}>('http://localhost:3000/contacts/', 
-//     newPokemon, {headers: headers})
-//     .subscribe(
-//       (responseData) => {
-//         this.pokemons.push(responseData.pokemon);
-//         this.sortAndSend();
-//       });
+    this.http.post<{message: string, pokemon: Pokemon}>('http://localhost:3000/contacts/', 
+    newPokemon, {headers: headers})
+    .subscribe(
+      (responseData) => {
+        this.pokemons.push(responseData.pokemon);
+        this.sortAndSend();
+      });
 
-//     //  newContact.id = this.maxContactId.toString();
+    //  newContact.id = this.maxContactId.toString();
 
-//     //  this.contacts.push(newContact);
+    //  this.contacts.push(newContact);
 
-//     //  const contactListClone = this.contacts.slice();
+    //  const contactListClone = this.contacts.slice();
 
-//     //  this.contactListChangedEvent.next(contactListClone);
-//     // this.storeContacts();
-//    }
+    //  this.contactListChangedEvent.next(contactListClone);
+    // this.storeContacts();
+   }
 
-//     deletePokemon(pokemon: Pokemon) {
-//     if (!pokemon) {
-//       return;
-//     }
+    deletePokemon(pokemon: Pokemon) {
+    if (!pokemon) {
+      return;
+    }
 
-//     const pos = this.pokemons.findIndex(c => c.id === pokemon.id);
-//     if(pos < 0) {
-//       return;
-//     }
+    const pos = this.pokemons.findIndex(c => c.id === pokemon.id);
+    if(pos < 0) {
+      return;
+    }
 
-//     this.http.delete('http://localhost:3000/contacts/' + pokemon.id)
-//     .subscribe(
-//       (response: Response) => {
-//         this.pokemons.splice(pos, 1);
-//         this.sortAndSend();
-//       }
-//     );
+    this.http.delete('http://localhost:3000/contacts/' + pokemon.id)
+    .subscribe(
+      (response: Response) => {
+        this.pokemons.splice(pos, 1);
+        this.sortAndSend();
+      }
+    );
 
-//     // this.contacts.splice(pos, 1);
-//     // const contactListClone = this.contacts.slice();
+    // this.contacts.splice(pos, 1);
+    // const contactListClone = this.contacts.slice();
 
-//     //  this.contactListChangedEvent.next(contactListClone);
-//     // this.contactChangedEvent.emit(this.contacts.slice());
-//     // this. storeContacts();
-//   }
+    //  this.contactListChangedEvent.next(contactListClone);
+    // this.contactChangedEvent.emit(this.contacts.slice());
+    // this. storeContacts();
+  }
 
-//    getPokemons() {
-//     //  return this.contacts.slice();
-//     this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/contacts/')
-//     .subscribe(
-//       (responseData) => {
-//         this.pokemons = responseData.pokemons;
-//         this.sortAndSend();
+   getPokemons() {
+    //  return this.contacts.slice();
+    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/contacts/')
+    .subscribe(
+      (responseData) => {
+        this.pokemons = responseData.pokemons;
+        this.sortAndSend();
 
-//         // this.maxContactId = this.getMaxId();
+        // this.maxContactId = this.getMaxId();
 
         
-//       },
-//       (error: any) => {
-//         console.log(error);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+   }
+
+   getPokemon(id: string) {
+    return this.http.get<{message: string, pokemon: Pokemon}>('http://localhost:3000/contacts/' + id);
+    //  .subscribe(
+    //    (responseData) => {
+    //      this.contacts = responseData.contacts;
+    //      this.sortAndSend();
+    //    }
+    //  );
+    //  for(const contact of this.contacts) {
+    //    if(contact.id === id) {
+    //      return contact;
+    //    }
+    //  }
+    //  return null;
+   }
+
+//    getMaxId(): number {
+//     let maxId = 0;
+
+//     for (const contact of this.contacts) {
+//       let currentId = parseInt(contact.id);
+
+//       if (currentId > maxId) {
+//         maxId = currentId;
 //       }
-//     )
+//     }
+//     return maxId;
 //    }
 
-//    getPokemon(id: string) {
-//     return this.http.get<{message: string, pokemon: Pokemon}>('http://localhost:3000/contacts/' + id);
-//     //  .subscribe(
-//     //    (responseData) => {
-//     //      this.contacts = responseData.contacts;
-//     //      this.sortAndSend();
-//     //    }
-//     //  );
-//     //  for(const contact of this.contacts) {
-//     //    if(contact.id === id) {
-//     //      return contact;
-//     //    }
-//     //  }
-//     //  return null;
-//    }
+   updateContact(originalPokemon: Pokemon, newPokemon: Pokemon) {
+     if (!originalPokemon || !newPokemon) {
+       return;
+     }
 
-// //    getMaxId(): number {
-// //     let maxId = 0;
+     const pos = this.pokemons.findIndex(c => c.id === originalPokemon.id);
 
-// //     for (const contact of this.contacts) {
-// //       let currentId = parseInt(contact.id);
+     if(pos < 0) {
+       return;
+     }
 
-// //       if (currentId > maxId) {
-// //         maxId = currentId;
-// //       }
-// //     }
-// //     return maxId;
-// //    }
+     newPokemon.id = originalPokemon.id;
 
-//    updateContact(originalPokemon: Pokemon, newPokemon: Pokemon) {
-//      if (!originalPokemon || !newPokemon) {
-//        return;
-//      }
+     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-//      const pos = this.pokemons.findIndex(c => c.id === originalPokemon.id);
+    //  const strContact = JSON.stringify(newContact);
 
-//      if(pos < 0) {
-//        return;
-//      }
+     this.http.put('http://localhost:3000/contacts/' + originalPokemon.id
+     , newPokemon, {headers: headers})
+     .subscribe(
+      (response: Response) => {
+        this.pokemons[pos] = newPokemon;
+        this.sortAndSend();
+      }
+       );
 
-//      newPokemon.id = originalPokemon.id;
+    //  this.contacts[pos] = newContact;
 
-//      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    //  const contactListClone = this.contacts.slice();
 
-//     //  const strContact = JSON.stringify(newContact);
+    //  this.contactListChangedEvent.next(contactListClone);
+    // this.storeContacts();
 
-//      this.http.put('http://localhost:3000/contacts/' + originalPokemon.id
-//      , newPokemon, {headers: headers})
-//      .subscribe(
-//       (response: Response) => {
-//         this.pokemons[pos] = newPokemon;
-//         this.sortAndSend();
-//       }
-//        );
+   }
 
-//     //  this.contacts[pos] = newContact;
+   storePokemons() {
+    let contacts = JSON.stringify(this.pokemons);
 
-//     //  const contactListClone = this.contacts.slice();
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-//     //  this.contactListChangedEvent.next(contactListClone);
-//     // this.storeContacts();
-
-//    }
-
-//    storePokemons() {
-//     let contacts = JSON.stringify(this.pokemons);
-
-//     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-//     this.http.put('https://rkjcms-54e6b.firebaseio.com/contacts.json', this.pokemons, {headers: headers})
-//     .subscribe(
-//       () => {
-//         this.pokemonListChangedEvent.next(this.pokemons.slice());
-//       }
-//     );
-//   }
+    this.http.put('https://rkjcms-54e6b.firebaseio.com/contacts.json', this.pokemons, {headers: headers})
+    .subscribe(
+      () => {
+        this.pokemonListChangedEvent.next(this.pokemons.slice());
+      }
+    );
+  }
 }
