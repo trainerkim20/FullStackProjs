@@ -5,40 +5,39 @@ var sequenceGenerator = require('./sequenceGenerator');
 const Pokemon = require('../models/pokemon');
 const { response } = require('express');
 
-var getPokemons = function(res) {
-    Pokemon.find()
-    .populate('group')
-    .exec(function (err, pokemons) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        res.status(200).json({
-            pokemon: 'Success',
-            obj: pokemons
-        });
-    })
-}
+// var getPokemons = function(res) {
+//     Pokemon.find()
+//     .exec(function (err, pokemons) {
+//         if (err) {
+//             return res.status(500).json({
+//                 title: 'An error occurred',
+//                 error: err
+//             });
+//         }
+//         res.status(200).json({
+//             pokemon: 'Success',
+//             obj: pokemons
+//         });
+//     })
+// }
 
-var savePokemon = function (response, contact) {
-    if(pokemon.group && pokemon.group.length > 0) {
-        for (let groupPokemon of pokemon.group) {
-            groupPokemon = groupPokemon._id;
-        }
-    }
-    pokemon.save(function (err, responseult) {
-        response.setHeader('Content-Type', 'application/json');
-        if (err) {
-            return response.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        getPokemons(response);
-    })
-}
+// var savePokemon = function (response, contact) {
+//     if(pokemon.group && pokemon.group.length > 0) {
+//         for (let groupPokemon of pokemon.group) {
+//             groupPokemon = groupPokemon._id;
+//         }
+//     }
+//     pokemon.save(function (err, responseult) {
+//         response.setHeader('Content-Type', 'application/json');
+//         if (err) {
+//             return response.status(500).json({
+//                 title: 'An error occurred',
+//                 error: err
+//             });
+//         }
+//         // getPokemons(response);
+//     })
+// }
 
 function returnError(res, error) {
     res.status(500).json({
@@ -49,7 +48,6 @@ function returnError(res, error) {
 
 router.get('/', (req, res, next) => {
     Pokemon.find()
-    .populate('group')
     .then(pokemons => {
         res.status(200).json({
             message: 'Pokemons fetched successfully!',
@@ -65,7 +63,6 @@ router.get('/:id', (req, res, next) => {
     Pokemon.findOne({
         "id": req.params.id
     })
-    .populate('group')
     .then(pokemon => {
         res.status(200).json({
             message: 'Pokemon fetched successfully!',

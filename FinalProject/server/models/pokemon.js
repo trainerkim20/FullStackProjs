@@ -8,7 +8,7 @@ var pokemonSchema = new Schema({
     nickname: {type: String},
     gender: {type: String, required: true},
     game: {type: String, required: true},
-    imageUrl: {type: String, required: true},
+    imageUrl: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Pokemon', pokemonSchema);

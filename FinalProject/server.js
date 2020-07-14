@@ -61,9 +61,9 @@ app.use('/', index);
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
 app.use('/pokemons', pokemonRoutes);
 
-app.use(function(req, res, next) {
-    res.render("index.html");
-});
+// app.use(function(req, res, next) {
+//     res.render(index);
+// });
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
