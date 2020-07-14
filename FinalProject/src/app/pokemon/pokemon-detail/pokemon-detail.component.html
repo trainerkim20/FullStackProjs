@@ -1,0 +1,33 @@
+<div class="top-contact-detail list-group-item clearfix">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{{ pokemon.name }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 pull-left">
+            <img src="{{pokemon?.imageUrl}}" alt="{{ pokemon?.name }}" 
+            class="img-responsive" 
+            style="max-height: 100px;">
+        </div>
+        <div class="pull-right">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a [routerLink]="['edit']" class="btn btn-primary" type="submit">Edit</a>
+                    <a  (click)= onDelete() class="btn btn-danger" type="submit">Delete</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="email-phone list-group-item clearfix">
+    <div class="row">
+        <p><strong>Nickname:</strong> {{ pokemon?.nickname }}</p>
+    </div>
+    <div class="row">
+        <p><strong>Gender:</strong> {{ pokemon?.type }}</p>
+    </div>
+    </div>
+    
+    

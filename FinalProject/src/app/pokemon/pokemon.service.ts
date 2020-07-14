@@ -130,7 +130,7 @@ export class PokemonService {
 //     return maxId;
 //    }
 
-   updateContact(originalPokemon: Pokemon, newPokemon: Pokemon) {
+   updatePokemon(originalPokemon: Pokemon, newPokemon: Pokemon) {
      if (!originalPokemon || !newPokemon) {
        return;
      }

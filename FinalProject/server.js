@@ -62,7 +62,7 @@ app.use('/', index);
 app.use('/pokemons', pokemonRoutes);
 
 app.use(function(req, res, next) {
-    res.render("index");
+    res.render("index.html");
 });
 
 // Tell express to map all other non-defined routes back to the index page
