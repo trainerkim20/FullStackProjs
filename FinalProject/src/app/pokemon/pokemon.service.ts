@@ -85,7 +85,7 @@ export class PokemonService {
 
    getPokemons() {
     //  return this.contacts.slice();
-    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemon/')
+    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemons/')
     .subscribe(
       (responseData) => {
         this.pokemons = responseData.pokemons;

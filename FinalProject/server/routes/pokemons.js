@@ -3,7 +3,7 @@ var router = express.Router();
 var sequenceGenerator = require('./sequenceGenerator');
 
 const Pokemon = require('../models/pokemon');
-const { response } = require('express');
+// const { response } = require('express');
 
 // var getPokemons = function(res) {
 //     Pokemon.find()
