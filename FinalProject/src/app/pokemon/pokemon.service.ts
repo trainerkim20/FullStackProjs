@@ -85,7 +85,7 @@ export class PokemonService {
 
    getPokemons() {
     //  return this.contacts.slice();
-    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemons/')
+    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemon/')
     .subscribe(
       (responseData) => {
         this.pokemons = responseData.pokemons;
@@ -165,16 +165,16 @@ export class PokemonService {
 
    }
 
-   storePokemons() {
-    let contacts = JSON.stringify(this.pokemons);
+  //  storePokemons() {
+  //   let contacts = JSON.stringify(this.pokemons);
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+  //   const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    this.http.put('https://rkjcms-54e6b.firebaseio.com/contacts.json', this.pokemons, {headers: headers})
-    .subscribe(
-      () => {
-        this.pokemonListChangedEvent.next(this.pokemons.slice());
-      }
-    );
-  }
+  //   this.http.put('https://rkjcms-54e6b.firebaseio.com/contacts.json', this.pokemons, {headers: headers})
+  //   .subscribe(
+  //     () => {
+  //       this.pokemonListChangedEvent.next(this.pokemons.slice());
+  //     }
+  //   );
+  // }
 }
