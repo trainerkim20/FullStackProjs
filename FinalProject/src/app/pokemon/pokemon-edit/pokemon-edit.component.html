@@ -54,8 +54,9 @@
               id="type"
               name="type"
               #type = "ngModel"
+              required
               [ngModel]=pokemon?.type
-              class="form-control invalid"
+              class="form-control required"
               size="150"
               max="255">
   
@@ -68,7 +69,7 @@
               id="game"
               name="game"
               #game = "ngModel"
-              [ngModel]=pokemon?.game
+              [ngModel]="[pokemon?.game]"
               class="form-control invalid"
               size="150"
               max="255">
@@ -112,7 +113,7 @@
   
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
+            <button class="btn btn-success" type="submit" >Save</button>
             <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
           </div>
         </div>

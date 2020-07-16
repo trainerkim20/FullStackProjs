@@ -35,6 +35,7 @@
         <div class="col-xs-12">
             <app-pokemon-item 
             *ngFor="let pokemon of pokemons"
+            [pokemon]="pokemon"
             ></app-pokemon-item>
             <!-- <a href="#" class="list-group-item clearfix" 
             *ngFor="let contact of contacts">

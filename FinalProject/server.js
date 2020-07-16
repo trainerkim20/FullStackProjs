@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'dist/finalproject')));
 app.use('/', index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
-app.use('/pokemon', pokemonRoutes);
+app.use('/pokemons', pokemonRoutes);
 
 // app.use(function(req, res, next) {
 //     res.render(index);

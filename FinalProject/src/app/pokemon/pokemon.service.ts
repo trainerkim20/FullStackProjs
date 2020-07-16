@@ -39,7 +39,7 @@ export class PokemonService {
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    this.http.post<{message: string, pokemon: Pokemon}>('http://localhost:3000/pokemon/', 
+    this.http.post<{message: string, pokemon: Pokemon}>('http://localhost:3000/pokemons/', 
     newPokemon, {headers: headers})
     .subscribe(
       (responseData) => {
@@ -67,7 +67,7 @@ export class PokemonService {
       return;
     }
 
-    this.http.delete('http://localhost:3000/pokemon/' + pokemon.id)
+    this.http.delete('http://localhost:3000/pokemons/' + pokemon.id)
     .subscribe(
       (response: Response) => {
         this.pokemons.splice(pos, 1);
@@ -85,7 +85,7 @@ export class PokemonService {
 
    getPokemons() {
     //  return this.contacts.slice();
-    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemon/')
+    this.http.get<{message: string, pokemons: Pokemon[]}>('http://localhost:3000/pokemons/')
     .subscribe(
       (responseData) => {
         this.pokemons = responseData.pokemons;
@@ -102,7 +102,7 @@ export class PokemonService {
    }
 
    getPokemon(id: string) {
-    return this.http.get<{message: string, pokemon: Pokemon}>('http://localhost:3000/pokemon/' + id);
+    return this.http.get<{message: string, pokemon: Pokemon}>('http://localhost:3000/pokemons/' + id);
     //  .subscribe(
     //    (responseData) => {
     //      this.contacts = responseData.contacts;
@@ -147,7 +147,7 @@ export class PokemonService {
 
     //  const strContact = JSON.stringify(newContact);
 
-     this.http.put('http://localhost:3000/pokemon/' + originalPokemon.id
+     this.http.put('http://localhost:3000/pokemons/' + originalPokemon.id
      , newPokemon, {headers: headers})
      .subscribe(
       (response: Response) => {
