@@ -29,6 +29,8 @@ export class PokemonEditComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
+        this.editMode = params['id'] != null;
+        // this.initForm();
 
         if (!this.id) {
           this.editMode = false;
@@ -75,6 +77,22 @@ export class PokemonEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['/pokemon']);
   }
+
+  // private initForm() {
+  //   let pokemonName = '';
+  //   let pokemonNickname = '';
+  //   let pokemonGender = '';
+  //   let pokemontype = '';
+  //   let pokemonType = '';
+  //   let pokemonGame = '';
+  //   let pokemonURL = '';
+
+  //   if (this.editMode) {
+  //     const pokemon = this.pokemonService.getPokemon(this.id);
+  //     pokemonName = pokemon.name;
+  //     pokemonNickname = pokemon.nickname;
+  //   }
+  // }
 
   // isInvalidContact(newPokemon: Pokemon) {
   //   if(!newPokemon) {
