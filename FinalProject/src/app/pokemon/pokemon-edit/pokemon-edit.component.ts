@@ -29,7 +29,7 @@ export class PokemonEditComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
-        this.editMode = params['id'] != null;
+        // this.editMode = params['id'] != null;
         // this.initForm();
 
         if (!this.id) {
@@ -78,54 +78,39 @@ export class PokemonEditComponent implements OnInit {
     this.router.navigate(['/pokemon']);
   }
 
-  // private initForm() {
-  //   let pokemonName = '';
-  //   let pokemonNickname = '';
-  //   let pokemonGender = '';
-  //   let pokemontype = '';
-  //   let pokemonType = '';
-  //   let pokemonGame = '';
-  //   let pokemonURL = '';
 
-  //   if (this.editMode) {
-  //     const pokemon = this.pokemonService.getPokemon(this.id);
-  //     pokemonName = pokemon.name;
-  //     pokemonNickname = pokemon.nickname;
-  //   }
-  // }
+  isInvalidContact(newPokemon: Pokemon) {
+    if(!newPokemon) {
+      return true;
+    }
+    if (this.pokemon && newPokemon.id === this.pokemon.id) {
+      return true;
+    }
+    for (let i = 0; i < this.groupPokemons.length; i++) {
+      if (newPokemon.id === this.groupPokemons[i].id) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-  // isInvalidContact(newPokemon: Pokemon) {
-  //   if(!newPokemon) {
-  //     return true;
-  //   }
-  //   if (this.pokemon && newPokemon.id === this.pokemon.id) {
-  //     return true;
-  //   }
-  //   for (let i = 0; i < this.groupPokemons.length; i++) {
-  //     if (newPokemon.id === this.groupPokemons[i].id) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+  addToGroup($event: any) {
+    let selectedPokemon: Pokemon = $event.dragData;
+    this.invalidGroupPokemon = this.isInvalidContact(selectedPokemon);
+    if (this.invalidGroupPokemon) {
+      return;
+    }
+    this.groupPokemons.push(selectedPokemon);
+    this.invalidGroupPokemon = false;
+  }
 
-  // addToGroup($event: any) {
-  //   let selectedPokemon: Pokemon = $event.dragData;
-  //   this.invalidGroupPokemon = this.isInvalidContact(selectedPokemon);
-  //   if (this.invalidGroupPokemon) {
-  //     return;
-  //   }
-  //   this.groupPokemons.push(selectedPokemon);
-  //   this.invalidGroupPokemon = false;
-  // }
+  onRemoveItem(idx: number) {
+    if (idx < 0 || idx >= this.groupPokemons.length)
+    return;
 
-  // onRemoveItem(idx: number) {
-  //   if (idx < 0 || idx >= this.groupPokemons.length)
-  //   return;
-
-  //   this.groupPokemons.splice(idx, 1);
-  //   this.invalidGroupPokemon = false;
-  // }
+    this.groupPokemons.splice(idx, 1);
+    this.invalidGroupPokemon = false;
+  }
 
 
 }
